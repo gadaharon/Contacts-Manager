@@ -1,5 +1,5 @@
 import React from "react";
-
+import { firstCharUpperCase } from '../../utils/Utils';
 const ContactItem = ({ contact }) => {
   const { id, name, email, phone, type } = contact;
   return (
@@ -12,7 +12,7 @@ const ContactItem = ({ contact }) => {
             (type === "professional" ? "badge-success" : "badge-primary")
           }
         >
-          {type}
+          {firstCharUpperCase(type)}
         </span>
       </h3>
     </div>
