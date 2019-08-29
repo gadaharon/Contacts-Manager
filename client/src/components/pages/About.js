@@ -5,7 +5,7 @@ const About = () => {
         <div>
             <h1>About This App</h1>
             <p className="my-1">
-                THis is a React app for keeping contacts
+                Contact Manager - React webapp for managing contacts
             </p>
             <p className="bg-dark p">
                 <strong>Version: </strong>1.0.0
