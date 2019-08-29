@@ -1,6 +1,8 @@
 import React from "react";
-import { firstCharUpperCase } from '../../utils/Utils';
-import './style.css';
+import PropTypes from "prop-types";
+import { firstCharUpperCase } from "../../utils/Utils";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./style.css";
 
 const ContactItem = ({ contact }) => {
   const { id, name, email, phone, type } = contact;
@@ -9,7 +11,7 @@ const ContactItem = ({ contact }) => {
       <h3 className="text-primary text-left">
         {name}{" "}
         <span
-          className={ 
+          className={
             "contact-type badge " +
             (type === "professional" ? "badge-success" : "badge-primary")
           }
@@ -17,8 +19,28 @@ const ContactItem = ({ contact }) => {
           {firstCharUpperCase(type)}
         </span>
       </h3>
+      <ul className="list">
+        {email && (
+          <li>
+            <FontAwesomeIcon icon="envelope-open" /> {email}
+          </li>
+        )}
+        {phone && (
+          <li>
+            <FontAwesomeIcon icon="phone" /> {phone}
+          </li>
+        )}
+        <p>
+          <button className="btn btn-dark btn-sm">Edit</button>
+          <button className="btn btn-danger btn-sm">Delete</button>
+        </p>
+      </ul>
     </div>
   );
+};
+
+ContactItem.propTypes = {
+  contact: PropTypes.object.isRequired
 };
 
 export default ContactItem;
