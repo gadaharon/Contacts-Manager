@@ -12,7 +12,7 @@ const Register = () => {
 
   const { name, email, password, password2 } = user;
 
-  const onChange = e => useState({ [e.target.name]: e.target.value });
+  const onChange = e => setUser({ [e.target.name]: e.target.value });
 
   const onSubmit = e => {
     e.preventDefault();
