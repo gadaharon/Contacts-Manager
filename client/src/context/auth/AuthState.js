@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
-import axios from "axios";
+import axios from 'axios';
 import AuthContext from "./AuthContext";
-import authReducer from "./AuthReducer";
+import AuthReducer from "./AuthReducer";
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -12,7 +12,6 @@ import {
   LOGOUT,
   CLEAR_ERRORS
 } from "../types";
-
 const AuthState = props => {
   const initialState = {
     token: localStorage.getItem("token"),
@@ -21,7 +20,7 @@ const AuthState = props => {
     user: null,
     error: null
   };
-  const [state, dispatch] = useReducer(AuthContext, initialState);
+  const [state, dispatch] = useReducer(AuthReducer, initialState);
 
   const loadUser = () => console.log("load user");
 
@@ -29,18 +28,21 @@ const AuthState = props => {
     const config = {
       headers: {
         "Content-Type": "application/json"
-      }
+      },
+      data: formData
     };
     try {
-      const res = await axios.post("/api/user", formData, config);
+      const res = await axios.post('http://localhost:5000/api/users', config);
+      console.log(res);
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
       });
     } catch (err) {
+      console.log(err)
       dispatch({
         type: REGISTER_FAIL,
-        payload: err.response.data.msg
+        payload: 'hello'
       });
     }
   };

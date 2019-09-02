@@ -6,23 +6,21 @@ const config = require("config");
 const { check, validationResult } = require("express-validator");
 
 const User = require("../models/User");
-
 // @route   POST api/users
 // @desc    Register a user
 // @access  Public
 router.post(
   "/",
   [
-    check("name", "Please add name")
+    check("name", "Please add name").isEmpty(),
+    check("email", "Please include a valid email")
       .not()
-      .isEmpty(),
-    check("email", "Please include a valid email").isEmail(),
-    check(
-      "password",
-      "Please enter a password with 6 or more characters"
-    ).isLength({
-      min: 6
-    })
+      .isEmail(),
+    check("password", "Please enter a password with 6 or more characters")
+      .not()
+      .isLength({
+        min: 6
+      })
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -30,7 +28,8 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, email, password } = req.body;
+    const { name, email, password } = req.body.data;
+
 
     try {
       let user = await User.findOne({ email });
