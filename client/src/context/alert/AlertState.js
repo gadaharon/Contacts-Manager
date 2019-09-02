@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import React, { useReducer } from "react";
 import uuid from "uuid";
 import AlertContext from "./AlertContext";
 import AlertReducer from "./AlertReducer";
@@ -22,3 +22,5 @@ const AlertState = props => {
     </AlertContext.Provider>
   );
 };
+
+export default AlertState;

@@ -8,24 +8,24 @@ import {
   CLEAR_FILTER
 } from "../types";
 
-export default (state, action) => {
-  switch (action.type) {
+export default (state, { type, payload }) => {
+  switch (type) {
     case ADD_CONTACT:
       return {
         ...state,
-        contacts: [...state.contacts, action.payload]
+        contacts: [...state.contacts, payload]
       };
     case DELETE_CONTACT:
       return {
         ...state,
         contacts: state.contacts.filter(
-          contact => contact.id !== action.payload
+          contact => contact.id !== payload
         )
       };
     case SET_CURRENT:
       return {
         ...state,
-        current: action.payload
+        current: payload
       };
     case CLEAR_CURRENT:
       return {
@@ -36,14 +36,14 @@ export default (state, action) => {
       return {
         ...state,
         contacts: state.contacts.map(contact =>
-          contact.id === action.payload.id ? action.payload : contact
+          contact.id === payload.id ? payload : contact
         )
       };
     case FILTER_CONTACTS:
       return {
         ...state,
         filtered: state.contacts.filter(contact => {
-          const regex = new RegExp(`${action.payload}`, "gi");
+          const regex = new RegExp(`${payload}`, "gi");
           return contact.name.match(regex) || contact.email.match(regex);
         })
       };
