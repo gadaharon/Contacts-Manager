@@ -24,6 +24,7 @@ const AuthState = props => {
 
   const loadUser = () => console.log("load user");
 
+  axios.defaults.baseURL = 'http://localhost:5000';
   const register = async formData => {
     const config = {
       headers: {
@@ -32,7 +33,7 @@ const AuthState = props => {
       data: formData
     };
     try {
-      const res = await axios.post('http://localhost:5000/api/users', config);
+      const res = await axios.post('/api/users', config);
       console.log(res);
       dispatch({
         type: REGISTER_SUCCESS,

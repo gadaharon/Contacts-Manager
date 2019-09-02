@@ -1,4 +1,3 @@
-const cors = require("cors");
 const whitelist = ["http://localhost:3000"];
 module.exports = function(req, res, next) {
   const origin = req.headers.origin;
